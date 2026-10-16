@@ -1,0 +1,1 @@
+"""BAMS web application package."""
