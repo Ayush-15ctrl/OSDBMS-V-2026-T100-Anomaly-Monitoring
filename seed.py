@@ -1,0 +1,1 @@
+"""Seed CLI boundary for real WAL/storage writes from synthetic personas."""
