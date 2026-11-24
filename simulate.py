@@ -1,0 +1,1 @@
+"""Simulation CLI/API boundary for replaying events through HTTP ingestion."""
