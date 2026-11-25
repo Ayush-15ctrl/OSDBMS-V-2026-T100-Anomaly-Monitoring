@@ -1,1 +1,1 @@
-"""BAMS web application package."""
+"""Application service layer boundaries."""
