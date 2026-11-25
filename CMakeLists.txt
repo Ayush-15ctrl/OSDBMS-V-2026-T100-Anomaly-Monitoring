@@ -1,36 +1,22 @@
 cmake_minimum_required(VERSION 3.18)
 project(bams_core LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
-find_package(pybind11 CONFIG REQUIRED)
-find_package(Threads REQUIRED)
+add_library(bams_deadlock src/deadlock.cpp)
+target_include_directories(bams_deadlock PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(bams_deadlock PUBLIC cxx_std_14)
 
-set(BAMS_CORE_SOURCES
-    src/storage.cpp
-    src/buffer_pool.cpp
-    src/lock_manager.cpp
-    src/deadlock.cpp
-    src/wal.cpp
-    bindings/bindings.cpp
-)
+add_executable(deadlock_demo tools/deadlock_demo.cpp)
+target_link_libraries(deadlock_demo PRIVATE bams_deadlock)
 
-pybind11_add_module(bams_core ${BAMS_CORE_SOURCES})
+add_executable(deadlock_cli tools/deadlock_cli.cpp)
+target_link_libraries(deadlock_cli PRIVATE bams_deadlock)
 
-target_include_directories(bams_core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(bams_core PRIVATE Threads::Threads)
+add_executable(deadlock_tests tests/deadlock_tests.cpp)
+target_link_libraries(deadlock_tests PRIVATE bams_deadlock)
 
-target_compile_features(bams_core PRIVATE cxx_std_17)
-
-# Keep the Python extension in the layout expected by the Phase 1 tests.
-set_target_properties(bams_core PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../python/bams_core
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../python/bams_core
-)
-
-# Implementations and tests will be enabled after the design review.
-# enable_testing()
-# add_subdirectory(tests)
+enable_testing()
+add_test(NAME deadlock_tests COMMAND deadlock_tests)
