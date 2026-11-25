@@ -1,0 +1,9 @@
+# ninja log v7
+44	874	8139928837305817	CMakeFiles/deadlock_tests.dir/tests/deadlock_tests.cpp.obj	ed29be9541e16903
+33	897	8139928837173225	CMakeFiles/deadlock_demo.dir/tools/deadlock_demo.cpp.obj	4c8661c0ffa45575
+22	1728	8139928837083840	CMakeFiles/bams_deadlock.dir/src/deadlock.cpp.obj	a4afc766d88f9ca3
+1728	2241	8139928854138281	libbams_deadlock.a	e201a4235ad4dc5f
+2241	2637	8139928859266053	deadlock_demo.exe	be3f7ce037887864
+2260	2679	8139928859464670	deadlock_tests.exe	5474925f0b00ad88
+137	12921	8152611091262325	CMakeFiles/deadlock_cli.dir/tools/deadlock_cli.cpp.obj	bdefabc8f260fa29
+12923	14262	8152611219128055	deadlock_cli.exe	c4651d90c1ec9ea
